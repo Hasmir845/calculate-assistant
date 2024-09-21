@@ -47,6 +47,7 @@ document.getElementById('calculate').addEventListener('click',function(){
 
     const totalExpensesValue = getResultValueById("total-expenses");
     totalExpensesValue.innerText =  totalExpenses.toFixed(2);
+   
     
     const totalBalance = getResultValueById('balance');
     totalBalance.innerText = balance.toFixed(2);
@@ -54,6 +55,12 @@ document.getElementById('calculate').addEventListener('click',function(){
 
     document.getElementById('calculate-savings').addEventListener('click',function(){
         const saving = getInputValueById('savings');
+        if(saving < 0 || saving > 100 ){
+            document.getElementById('savings-error').classList.remove('hidden');
+            return;
+        }
+        else{
+            document.getElementById('savings-error').classList.add('hidden');
         const savingAmount = (balance * saving ) / 100;
         const remainingBalance = balance - savingAmount;
         
@@ -62,6 +69,9 @@ document.getElementById('calculate').addEventListener('click',function(){
 
         const remainingBalanceValue = getResultValueById('remaining-balance');
         remainingBalanceValue.innerText = remainingBalance.toFixed(2);
+        }
+        document.getElementById('savings').value = '';
+        
     })
     getResultValueById('results').classList.remove('hidden')
 
@@ -78,7 +88,14 @@ document.getElementById('calculate').addEventListener('click',function(){
     `
     const historyContainer = document.getElementById('history-list');
     historyContainer.insertBefore(historyItem, historyContainer.firstChild);
+
+   
     }
+   document.getElementById('income').value = '';
+   document.getElementById('software').value = '';
+   document.getElementById('courses').value = '';
+   document.getElementById('internet').value = '';
+   
     
 })
 
